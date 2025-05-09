@@ -17,8 +17,5 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
         public int RecipeId { get; set; }
 
         public Recipe Recipe { get; set; }
-
-        public List<Ingredient> Ingredients { get; set; } = new();
-
     }
 }

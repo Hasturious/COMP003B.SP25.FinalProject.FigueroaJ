@@ -1,15 +1,18 @@
-﻿using COMP003B.SP25.FinalProject.FigueroaJ.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class ApplicationDbContext : DbContext
+namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options) { }
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
 
-    public DbSet<User> Users { get; set; }
-    public DbSet<Recipe> Recipes { get; set; }
-    public DbSet<Favorite> Favorites { get; set; }
-    public DbSet<Ingredient> Ingredients { get; set; }   
-    public DbSet<Review> Reviews { get; set; }        
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
+    }
 }

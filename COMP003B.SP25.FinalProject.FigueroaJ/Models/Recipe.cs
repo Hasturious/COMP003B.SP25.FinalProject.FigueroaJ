@@ -24,7 +24,11 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         public Favorite Favorite { get; set; }
 
-        public List<Ingredient> Ingrediants { get; set; } //1:M Recipe to Ingredients
+        public List<Favorite> Favorites { get; set; }
+
+        public List<Review> Reviews { get; set; }
+
+        public List<Ingredient> Ingredients { get; set; } //1:M Recipe to Ingredients
 
         //Design Philosophy, Users create many recipies, recipies have many ingrediants. Thats 3 models
         //Could add an Review model. Users have many Reviews (as in Reviews are created by users, not that the users are reviewed), Recipies Have many Reviews
