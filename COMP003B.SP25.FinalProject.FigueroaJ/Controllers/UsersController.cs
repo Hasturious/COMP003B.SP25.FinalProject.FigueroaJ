@@ -59,9 +59,9 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             {
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index)); // Redirect to index after successful creation
             }
-            return View(user);
+            return View(user); // Return the form with validation errors
         }
 
         // GET: Users/Edit/5
