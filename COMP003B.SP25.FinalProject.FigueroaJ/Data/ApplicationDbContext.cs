@@ -17,33 +17,35 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Favorite relationships
-            modelBuilder.Entity<Favorite>()
-                .HasOne(f => f.User)
-                .WithMany()
-                .HasForeignKey(f => f.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+            base.OnModelCreating(modelBuilder);
 
+            // Favorite -> Recipe relationship
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.Recipe)
                 .WithMany()
                 .HasForeignKey(f => f.RecipeId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.SetNull);  // Set RecipeId to null when the Recipe is deleted
 
-            // Review relationships
+            // Favorite -> User relationship
+            modelBuilder.Entity<Favorite>()
+                .HasOne(f => f.User)
+                .WithMany()
+                .HasForeignKey(f => f.UserId)
+                .OnDelete(DeleteBehavior.Cascade);  // Cascade delete for User (if you want favorites deleted when users are deleted)
+
+            // Review -> User relationship
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.User)
                 .WithMany()
                 .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);  // Cascade delete for Review
 
+            // Review -> Recipe relationship
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.Recipe)
                 .WithMany()
                 .HasForeignKey(r => r.RecipeId)
-                .OnDelete(DeleteBehavior.SetNull);
-
-            base.OnModelCreating(modelBuilder);
+                .OnDelete(DeleteBehavior.SetNull);  // Set Review RecipeId to null when Recipe is deleted
         }
     }
 }

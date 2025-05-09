@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250509214236_CleanedUpRelationships")]
-    partial class CleanedUpRelationships
+    [Migration("20250509215821_UpdateFavoriteRelationship")]
+    partial class UpdateFavoriteRelationship
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,45 +23,6 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Favorite", b =>
-                {
-                    b.Property<int>("FavoriteId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavoriteId"));
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RecipeId1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Visibility")
-                        .HasColumnType("bit");
-
-                    b.HasKey("FavoriteId");
-
-                    b.HasIndex("RecipeId");
-
-                    b.HasIndex("RecipeId1");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("Favorites");
-                });
 
             modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Ingredient", b =>
                 {
@@ -126,7 +87,75 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Review", b =>
+            modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<string>("Bio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Favorite", b =>
+                {
+                    b.Property<int>("FavoriteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavoriteId"));
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RecipeId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Visibility")
+                        .HasColumnType("bit");
+
+                    b.HasKey("FavoriteId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.HasIndex("RecipeId1");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Favorites");
+                });
+
+            modelBuilder.Entity("Review", b =>
                 {
                     b.Property<int>("ReviewId")
                         .ValueGeneratedOnAdd()
@@ -166,62 +195,6 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
-
-                    b.Property<string>("Bio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Favorite", b =>
-                {
-                    b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.Recipe", "Recipe")
-                        .WithMany()
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
-
-                    b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.Recipe", null)
-                        .WithMany("Favorites")
-                        .HasForeignKey("RecipeId1");
-
-                    b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.User", null)
-                        .WithMany("Favorites")
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("Recipe");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Ingredient", b =>
                 {
                     b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.Recipe", "Recipe")
@@ -244,7 +217,33 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Review", b =>
+            modelBuilder.Entity("Favorite", b =>
+                {
+                    b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.Recipe", "Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.Recipe", null)
+                        .WithMany("Favorites")
+                        .HasForeignKey("RecipeId1");
+
+                    b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.User", null)
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Recipe");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Review", b =>
                 {
                     b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.Recipe", "Recipe")
                         .WithMany()

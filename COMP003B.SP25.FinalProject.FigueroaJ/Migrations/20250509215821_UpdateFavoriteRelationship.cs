@@ -5,7 +5,7 @@
 namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 {
     /// <inheritdoc />
-    public partial class CleanedUpRelationships : Migration
+    public partial class UpdateFavoriteRelationship : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,7 +56,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                     FavoriteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    RecipeId = table.Column<int>(type: "int", nullable: false),
+                    RecipeId = table.Column<int>(type: "int", nullable: true),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Visibility = table.Column<bool>(type: "bit", nullable: false),
                     RecipeId1 = table.Column<int>(type: "int", nullable: true),
