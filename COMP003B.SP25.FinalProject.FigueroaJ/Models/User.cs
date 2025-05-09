@@ -21,6 +21,6 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         public List<Review> Reviews { get; set; } = new();
 
-        public List<Recipe> Recipes { get; set; } //Each user has many recipes
+        public List<Recipe> Recipes { get; set; } = new(); //Each user has many recipes
     }
 }
