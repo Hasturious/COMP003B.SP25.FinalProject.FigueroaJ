@@ -1,5 +1,6 @@
-
+using COMP003B.SP25.FinalProject.FigueroaJ.Models;
 using Microsoft.EntityFrameworkCore;
+
 namespace COMP003B.SP25.FinalProject.FigueroaJ
 {
     public class Program
@@ -11,10 +12,10 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            /*
+            
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer("Name=ConnectionStrings:DefaultConnection"));
-            */
+            
 
             var app = builder.Build();
 

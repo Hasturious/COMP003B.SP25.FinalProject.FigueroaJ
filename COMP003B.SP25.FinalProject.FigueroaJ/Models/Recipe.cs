@@ -22,8 +22,6 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         public User User { get; set; }
 
-        public Favorite Favorite { get; set; }
-
         public List<Favorite> Favorites { get; set; }
 
         public List<Review> Reviews { get; set; }
