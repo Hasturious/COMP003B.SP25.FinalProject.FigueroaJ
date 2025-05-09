@@ -14,7 +14,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         public string Note { get; set; } //Personal notes on a recipe, the users can make an ingrediant replacement or perhaps a short list of who likes/dislikes this mean
 
-        public bool Visbility { get; set; } //Shows/Hides the recipe on the users profile
+        public bool Visibility { get; set; } //Shows/Hides the recipe on the users profile
 
         public User User { get; set; }
 
