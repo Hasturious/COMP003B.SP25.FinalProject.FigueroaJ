@@ -9,6 +9,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
         {
         }
 
+        // DbSets
         public DbSet<User> Users { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
@@ -17,35 +18,42 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            // Recipe-Ingridient Relationship (One-to-Many)
+            modelBuilder.Entity<Recipe>()
+                .HasMany(r => r.Ingredients)
+                .WithOne(i => i.Recipe)
+                .HasForeignKey(i => i.RecipeId)
+                .OnDelete(DeleteBehavior.Cascade); // If Recipe is deleted, ingredients are deleted as well
 
-            // Favorite -> Recipe relationship
-            modelBuilder.Entity<Favorite>()
-                .HasOne(f => f.Recipe)
-                .WithMany()
+            // Recipe-Favorite Relationship (One-to-Many)
+            modelBuilder.Entity<Recipe>()
+                .HasMany(r => r.Favorites)
+                .WithOne(f => f.Recipe)
                 .HasForeignKey(f => f.RecipeId)
-                .OnDelete(DeleteBehavior.SetNull);  // Set RecipeId to null when the Recipe is deleted
+                .OnDelete(DeleteBehavior.Cascade); // If Recipe is deleted, favorites are deleted as well
 
-            // Favorite -> User relationship
-            modelBuilder.Entity<Favorite>()
-                .HasOne(f => f.User)
-                .WithMany()
+            // Recipe-Review Relationship (One-to-Many)
+            modelBuilder.Entity<Recipe>()
+                .HasMany(r => r.Reviews)
+                .WithOne(rv => rv.Recipe)
+                .HasForeignKey(rv => rv.RecipeId)
+                .OnDelete(DeleteBehavior.SetNull); // If Recipe is deleted, reviews are not deleted but RecipeId is set to null
+
+            // User-Favorite Relationship (One-to-Many)
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Favorites)
+                .WithOne(f => f.User)
                 .HasForeignKey(f => f.UserId)
-                .OnDelete(DeleteBehavior.Cascade);  // Cascade delete for User (if you want favorites deleted when users are deleted)
+                .OnDelete(DeleteBehavior.Cascade); // If User is deleted, favorites are deleted as well
 
-            // Review -> User relationship
-            modelBuilder.Entity<Review>()
-                .HasOne(r => r.User)
-                .WithMany()
+            // User-Review Relationship (One-to-Many)
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Reviews)
+                .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Cascade);  // Cascade delete for Review
+                .OnDelete(DeleteBehavior.Cascade); // If User is deleted, reviews are deleted as well
 
-            // Review -> Recipe relationship
-            modelBuilder.Entity<Review>()
-                .HasOne(r => r.Recipe)
-                .WithMany()
-                .HasForeignKey(r => r.RecipeId)
-                .OnDelete(DeleteBehavior.SetNull);  // Set Review RecipeId to null when Recipe is deleted
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
