@@ -20,28 +20,28 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
             // Cascade delete for Favorites (user delete)
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.User)
-                .WithMany()
+                .WithMany(u => u.Favorites) // Define reverse navigation property
                 .HasForeignKey(f => f.UserId)
                 .OnDelete(DeleteBehavior.Cascade); // Automatically delete favorites when user is deleted
 
             // Set foreign key to NULL for Favorites when a Recipe is deleted
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.Recipe)
-                .WithMany()
+                .WithMany(r => r.Favorites) // Define reverse navigation property
                 .HasForeignKey(f => f.RecipeId)
                 .OnDelete(DeleteBehavior.SetNull); // Set RecipeId to NULL when the recipe is deleted
 
             // Cascade delete for Reviews (user delete)
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.User)
-                .WithMany()
+                .WithMany(u => u.Reviews) // Define reverse navigation property
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade); // Automatically delete reviews when user is deleted
 
             // Set foreign key to NULL for Reviews when a Recipe is deleted
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.Recipe)
-                .WithMany()
+                .WithMany(r => r.Reviews) // Define reverse navigation property
                 .HasForeignKey(r => r.RecipeId)
                 .OnDelete(DeleteBehavior.SetNull); // Set RecipeId to NULL when the recipe is deleted
 
