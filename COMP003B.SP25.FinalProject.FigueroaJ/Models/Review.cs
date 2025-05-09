@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 {
@@ -8,18 +9,20 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         [Required]
         public int UserId { get; set; }
+
+        [ForeignKey("UserId")]
         public User User { get; set; }
 
         [Required]
-        public int? RecipeId { get; set; }
+        public int RecipeId { get; set; }
+
+        [ForeignKey("RecipeId")]
         public Recipe Recipe { get; set; }
 
         [Required]
-        public bool Recomended { get; set; } //true = like, false = dislike. While I could use a typical 1-5 rating system I prefer the boolean Like/Dislike system of review (Inspired from Steam)
+        public string Content { get; set; }
 
-        public string? Comment { get; set; }
-
-
-        
+        [Required]
+        public bool Rating { get; set;  } //true = Good false = Bad : Inspired from Steams review system
     }
 }

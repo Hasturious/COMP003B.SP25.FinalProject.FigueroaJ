@@ -5,7 +5,7 @@
 namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CleanedUpRelationships : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -58,7 +58,9 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     RecipeId = table.Column<int>(type: "int", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Visibility = table.Column<bool>(type: "bit", nullable: false)
+                    Visibility = table.Column<bool>(type: "bit", nullable: false),
+                    RecipeId1 = table.Column<int>(type: "int", nullable: true),
+                    UserId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,13 +70,23 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "RecipeId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Favorites_Recipes_RecipeId1",
+                        column: x => x.RecipeId1,
+                        principalTable: "Recipes",
+                        principalColumn: "RecipeId");
                     table.ForeignKey(
                         name: "FK_Favorites_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Favorites_Users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -107,8 +119,10 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     RecipeId = table.Column<int>(type: "int", nullable: false),
-                    Recomended = table.Column<bool>(type: "bit", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<bool>(type: "bit", nullable: false),
+                    RecipeId1 = table.Column<int>(type: "int", nullable: true),
+                    UserId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -118,13 +132,23 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "RecipeId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Recipes_RecipeId1",
+                        column: x => x.RecipeId1,
+                        principalTable: "Recipes",
+                        principalColumn: "RecipeId");
                     table.ForeignKey(
                         name: "FK_Reviews_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -133,9 +157,19 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Favorites_RecipeId1",
+                table: "Favorites",
+                column: "RecipeId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Favorites_UserId",
                 table: "Favorites",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favorites_UserId1",
+                table: "Favorites",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ingredients_RecipeId",
@@ -153,9 +187,19 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reviews_RecipeId1",
+                table: "Reviews",
+                column: "RecipeId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_UserId",
                 table: "Reviews",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_UserId1",
+                table: "Reviews",
+                column: "UserId1");
         }
 
         /// <inheritdoc />

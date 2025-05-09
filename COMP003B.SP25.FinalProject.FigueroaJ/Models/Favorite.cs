@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 {
@@ -6,16 +7,20 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
     {
         public int FavoriteId { get; set; }
 
-        public string? Note { get; set; } //Personal notes on a recipe, the users can make an ingrediant replacement or perhaps a short list of who likes/dislikes this mean
+        [Required]
+        public int UserId { get; set; }         
 
-        public bool Visibility { get; set; } //Shows/Hides the recipe on the users profile
+        [ForeignKey("UserId")]
+        public User User { get; set; }       
 
         [Required]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public int RecipeId { get; set; }        
 
-        [Required]
-        public int? RecipeId { get; set; } //optional for when it gets deleted
-        public Recipe Recipe { get; set; }
+        [ForeignKey("RecipeId")]
+        public Recipe Recipe { get; set; }       
+
+        public string? Note { get; set; }
+
+        public bool Visibility { get; set; }       
     }
 }

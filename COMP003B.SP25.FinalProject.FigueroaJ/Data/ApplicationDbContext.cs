@@ -17,36 +17,33 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Cascade delete for Favorites (user delete)
+            // Favorite relationships
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.User)
-                .WithMany(u => u.Favorites) // Define reverse navigation property
+                .WithMany()
                 .HasForeignKey(f => f.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // Automatically delete favorites when user is deleted
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Set foreign key to NULL for Favorites when a Recipe is deleted
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.Recipe)
-                .WithMany(r => r.Favorites) // Define reverse navigation property
+                .WithMany()
                 .HasForeignKey(f => f.RecipeId)
-                .OnDelete(DeleteBehavior.SetNull); // Set RecipeId to NULL when the recipe is deleted
+                .OnDelete(DeleteBehavior.SetNull);
 
-            // Cascade delete for Reviews (user delete)
+            // Review relationships
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.User)
-                .WithMany(u => u.Reviews) // Define reverse navigation property
+                .WithMany()
                 .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // Automatically delete reviews when user is deleted
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Set foreign key to NULL for Reviews when a Recipe is deleted
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.Recipe)
-                .WithMany(r => r.Reviews) // Define reverse navigation property
+                .WithMany()
                 .HasForeignKey(r => r.RecipeId)
-                .OnDelete(DeleteBehavior.SetNull); // Set RecipeId to NULL when the recipe is deleted
+                .OnDelete(DeleteBehavior.SetNull);
 
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }
