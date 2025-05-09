@@ -5,7 +5,7 @@
 namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class UpdateRelationships : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -99,7 +99,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                     ReviewId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    RecipeId = table.Column<int>(type: "int", nullable: false),
+                    RecipeId = table.Column<int>(type: "int", nullable: true),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>

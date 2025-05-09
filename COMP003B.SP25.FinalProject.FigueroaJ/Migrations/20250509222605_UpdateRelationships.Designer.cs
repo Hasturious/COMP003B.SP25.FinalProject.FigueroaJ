@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250509221416_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250509222605_UpdateRelationships")]
+    partial class UpdateRelationships
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,7 +123,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RecipeId")
+                    b.Property<int?>("RecipeId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -202,8 +202,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
                     b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.Recipe", "Recipe")
                         .WithMany("Reviews")
                         .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("COMP003B.SP25.FinalProject.FigueroaJ.Models.User", "User")
                         .WithMany("Reviews")
