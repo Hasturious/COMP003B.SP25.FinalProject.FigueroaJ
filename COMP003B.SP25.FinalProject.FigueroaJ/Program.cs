@@ -1,3 +1,5 @@
+using COMP003B.SP25.FinalProject.FigueroaJ.Data;
+using Microsoft.EntityFrameworkCore;
 namespace COMP003B.SP25.FinalProject.FigueroaJ
 {
     public class Program
@@ -9,6 +11,9 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer("Name=ConnectionStrings:DefaultConnection"));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -18,7 +23,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+               
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

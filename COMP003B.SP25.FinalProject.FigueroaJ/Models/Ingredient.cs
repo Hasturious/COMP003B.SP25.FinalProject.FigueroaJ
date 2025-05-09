@@ -12,7 +12,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
         [Required]
         public string Amount { get; set; } // 1/2 cups, 2 tablespoons, etc
 
-        public string Diet { get; set; } // Vegan, Keto, Low carb, etc
+        public string? Diet { get; set; } // Vegan, Keto, Low carb, etc
 
         public int RecipeId { get; set; }
 

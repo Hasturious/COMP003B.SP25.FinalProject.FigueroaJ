@@ -22,6 +22,8 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         public User User { get; set; }
 
+        public Favorite Favorite { get; set; }
+
         public List<Ingredient> Ingrediants { get; set; } //1:M Recipe to Ingredients
 
         //Design Philosophy, Users create many recipies, recipies have many ingrediants. Thats 3 models
