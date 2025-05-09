@@ -15,22 +15,6 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Data
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Favorite>()
-                .HasOne(f => f.User)
-                .WithMany(u => u.Favorite)
-                .HasForeignKey(f => f.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // Prevent multiple cascade paths
-
-            modelBuilder.Entity<Favorite>()
-                .HasOne(f => f.Recipe)
-                .WithMany(r => r.Favorite)
-                .HasForeignKey(f => f.RecipeId)
-                .OnDelete(DeleteBehavior.Cascade);
-        }
+        
     }
 }
