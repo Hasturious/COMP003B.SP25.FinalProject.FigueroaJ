@@ -39,6 +39,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
                 .HasForeignKey(rv => rv.RecipeId)
                 .OnDelete(DeleteBehavior.SetNull); // If Recipe is deleted, reviews are not deleted but RecipeId is set to null
 
+
             // User-Favorite Relationship (One-to-Many)
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Favorites)
