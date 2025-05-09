@@ -18,6 +18,5 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         public User User { get; set; }
         public Recipe Recipe { get; set; }
-
     }
 }
