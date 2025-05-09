@@ -17,7 +17,9 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         public string Bio { get; set; }
 
-        public Favorite Favorite { get; set; }
+        public List<Favorite> Favorites { get; set; } = new();
+
+        public List<Review> Reviews { get; set; } = new();
 
         public List<Recipe> Recipes { get; set; } //Each user has many recipes
     }

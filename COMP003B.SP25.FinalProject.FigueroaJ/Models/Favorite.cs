@@ -16,10 +16,8 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         public bool Visibility { get; set; } //Shows/Hides the recipe on the users profile
 
-        [Required]
         public User User { get; set; }
-
-        [Required]
         public Recipe Recipe { get; set; }
+
     }
 }
