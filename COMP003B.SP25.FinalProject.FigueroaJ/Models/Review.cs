@@ -15,7 +15,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
         [Required]
         public bool Recomended { get; set; } //true = like, false = dislike. While I could use a typical 1-5 rating system I prefer the boolean Like/Dislike system of review (Inspired from Steam)
 
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         public User User { get; set; }
 
