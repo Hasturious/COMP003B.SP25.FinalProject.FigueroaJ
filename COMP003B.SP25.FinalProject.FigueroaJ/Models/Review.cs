@@ -5,12 +5,18 @@
     {
         public int ReviewId { get; set; }
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        // Make UserId nullable to indicate it's optional during form binding
+        public int? UserId { get; set; }
 
+        // Make navigation property nullable to avoid validation issues
+        public User? User { get; set; }
+
+        // Same for RecipeId and Recipe
         public int? RecipeId { get; set; }
-        public Recipe Recipe { get; set; }
 
-        public string Comment { get; set; } //false = dislike true = like
+        public Recipe? Recipe { get; set; }
+
+        public string Comment { get; set; } 
+        public bool Reccomend { get; set; } //false = dislike true = like
     }
 }
