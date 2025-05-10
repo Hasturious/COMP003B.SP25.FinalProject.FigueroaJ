@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 {
@@ -15,7 +16,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         [Required]
         public int RecipeId { get; set; }
-
+        [ValidateNever]
         public Recipe Recipe { get; set; }
     }
 
