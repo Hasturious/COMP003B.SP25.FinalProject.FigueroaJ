@@ -16,6 +16,8 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         [Required]
         public int RecipeId { get; set; }
+
+        //This is probably a bad way to do this but removing the line below breaks things and this just works so im doing it
         [ValidateNever]
         public Recipe Recipe { get; set; }
     }

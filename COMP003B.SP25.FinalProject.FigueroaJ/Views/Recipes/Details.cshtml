@@ -41,6 +41,21 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Notes)
         </dd>
+        <h4>Ingredients</h4>
+        @if (Model.Ingredients != null && Model.Ingredients.Any())
+        {
+            <ul>
+                @foreach (var ingredient in Model.Ingredients)
+                {
+                    <li>@ingredient.Quantity - @ingredient.Name</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No ingredients found for this recipe.</p>
+        }
+
     </dl>
 </div>
 <div>
