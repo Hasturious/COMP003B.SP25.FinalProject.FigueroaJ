@@ -48,11 +48,18 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         // GET: Favorites/Create
         public IActionResult Create()
         {
+            // Check if any users or recipes exist in the DB
+            bool usersExist = _context.Users.Any();
+            bool recipesExist = _context.Recipes.Any();
+
+            ViewBag.DebugUsersExist = usersExist;
+            ViewBag.DebugRecipesExist = recipesExist;
+
             ViewBag.UserId = new SelectList(_context.Users, "UserId", "Username");
             ViewBag.RecipeId = new SelectList(_context.Recipes, "RecipeId", "Title");
+
             return View();
         }
-
         // POST: Favorites/Create
 
         [HttpPost]
@@ -65,26 +72,25 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeId", favorite.RecipeId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", favorite.UserId);
+
+            // Put these here to re-populate dropdowns after a failed submission
+            ViewBag.UserId = new SelectList(_context.Users, "UserId", "Username", favorite.UserId);
+            ViewBag.RecipeId = new SelectList(_context.Recipes, "RecipeId", "Title", favorite.RecipeId);
+
             return View(favorite);
         }
 
         // GET: Favorites/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var favorite = await _context.Favorites.FindAsync(id);
-            if (favorite == null)
-            {
-                return NotFound();
-            }
-            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeId", favorite.RecipeId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", favorite.UserId);
+            if (favorite == null) return NotFound();
+
+            ViewBag.UserId = new SelectList(_context.Users, "UserId", "Username", favorite.UserId);
+            ViewBag.RecipeId = new SelectList(_context.Recipes, "RecipeId", "Title", favorite.RecipeId);
+
             return View(favorite);
         }
 
@@ -93,10 +99,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("FavoriteId,UserId,RecipeId,Note,Visibility")] Favorite favorite)
         {
-            if (id != favorite.FavoriteId)
-            {
-                return NotFound();
-            }
+            if (id != favorite.FavoriteId) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -104,22 +107,18 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
                 {
                     _context.Update(favorite);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FavoriteExists(favorite.FavoriteId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!FavoriteExists(favorite.FavoriteId)) return NotFound();
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeId", favorite.RecipeId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", favorite.UserId);
+
+            ViewBag.UserId = new SelectList(_context.Users, "UserId", "Username", favorite.UserId);
+            ViewBag.RecipeId = new SelectList(_context.Recipes, "RecipeId", "Title", favorite.RecipeId);
+
             return View(favorite);
         }
 
