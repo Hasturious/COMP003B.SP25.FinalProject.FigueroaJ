@@ -24,7 +24,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(await _context.Recipes.ToListAsync());
         }
 
-        // GET: Recipes/Details/5
+        // GET: Recipes/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,8 +49,6 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         }
 
         // POST: Recipes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RecipeId,RecipeTitle,RecipeDescription,RecipeInstructions,RecipeType,Notes")] Recipe recipe)
@@ -64,7 +62,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(recipe);
         }
 
-        // GET: Recipes/Edit/5
+        // GET: Recipes/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,9 +78,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(recipe);
         }
 
-        // POST: Recipes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Recipes/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("RecipeId,RecipeTitle,RecipeDescription,RecipeInstructions,RecipeType,Notes")] Recipe recipe)
@@ -133,7 +129,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(recipe);
         }
 
-        // POST: Recipes/Delete/5
+        // POST: Recipes/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

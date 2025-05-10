@@ -47,7 +47,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Favorites");
+                    b.ToTable("Favorites", (string)null);
                 });
 
             modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Ingredient", b =>
@@ -76,7 +76,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Ingredients", (string)null);
                 });
 
             modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Recipe", b =>
@@ -108,7 +108,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 
                     b.HasKey("RecipeId");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipes", (string)null);
                 });
 
             modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Review", b =>
@@ -135,7 +135,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.User", b =>
@@ -164,7 +164,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("COMP003B.SP25.FinalProject.FigueroaJ.Models.Favorite", b =>

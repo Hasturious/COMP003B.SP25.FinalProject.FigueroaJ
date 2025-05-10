@@ -18,21 +18,20 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Recipe-Ingridient Relationship (One-to-Many)
+
             modelBuilder.Entity<Recipe>()
                 .HasMany(r => r.Ingredients)
                 .WithOne(i => i.Recipe)
                 .HasForeignKey(i => i.RecipeId)
                 .OnDelete(DeleteBehavior.Cascade); // If Recipe is deleted, ingredients are deleted as well
 
-            // Recipe-Favorite Relationship (One-to-Many)
-            modelBuilder.Entity<Recipe>()
+
+           modelBuilder.Entity<Recipe>()
                 .HasMany(r => r.Favorites)
                 .WithOne(f => f.Recipe)
                 .HasForeignKey(f => f.RecipeId)
                 .OnDelete(DeleteBehavior.Cascade); // If Recipe is deleted, favorites are deleted as well
 
-            // Recipe-Review Relationship (One-to-Many)
             modelBuilder.Entity<Recipe>()
                 .HasMany(r => r.Reviews)
                 .WithOne(rv => rv.Recipe)
@@ -40,20 +39,18 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Models
                 .OnDelete(DeleteBehavior.SetNull); // If Recipe is deleted, reviews are not deleted but RecipeId is set to null
 
 
-            // User-Favorite Relationship (One-to-Many)
+            
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Favorites)
                 .WithOne(f => f.User)
                 .HasForeignKey(f => f.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // If User is deleted, favorites are deleted as well
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // User-Review Relationship (One-to-Many)
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Reviews)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // If User is deleted, reviews are deleted as well
-
+                .OnDelete(DeleteBehavior.Cascade); 
             base.OnModelCreating(modelBuilder);
         }
     }
