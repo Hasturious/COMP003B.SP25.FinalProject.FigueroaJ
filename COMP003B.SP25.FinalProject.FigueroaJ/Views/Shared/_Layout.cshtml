@@ -61,4 +61,12 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<!-- This nav bar is pretty bad this isnt an HTML class. Its a partial view -->
+<body>
+    @Html.Partial("_NavMenu")
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+
 </html>

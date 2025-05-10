@@ -4,8 +4,13 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h1>Recipe</h1>
 
-<h1>Index</h1>
+<!-- The other partial view. this one actually looks really good, much closer to a typical feed on like Pintrest or something -->
+@foreach (var recipe in Model)
+{
+    @Html.Partial("_RecipeCard", recipe)
+}
 
 <p>
     <a asp-action="Create">Create New</a>

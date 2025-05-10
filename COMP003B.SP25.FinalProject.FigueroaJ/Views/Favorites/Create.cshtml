@@ -5,6 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">Form is invalid. Check fields.</div>
+}
+
+<h1>Create User</h1>
+
+@foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+{
+    <div class="text-danger">@modelError.ErrorMessage</div>
+}
+
 <h1>Create</h1>
 
 <h4>Favorite</h4>

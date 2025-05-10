@@ -1,0 +1,9 @@
+﻿@model COMP003B.SP25.FinalProject.FigueroaJ.Models.Recipe
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.RecipeTitle</h5>
+        <p class="card-text">@Model.RecipeDescription</p>
+        <a class="btn btn-primary" asp-controller="Recipes" asp-action="Details" asp-route-id="@Model.RecipeId">View</a>
+    </div>
+</div>
