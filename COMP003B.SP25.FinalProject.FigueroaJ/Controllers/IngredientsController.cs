@@ -47,7 +47,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         // GET: Ingredients/Create
         public IActionResult Create()
         {
-            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeId");
+            ViewBag.RecipeId = new SelectList(_context.Recipes, "RecipeId", "RecipeTitle");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IngredientId,Name,Quantity,Diet,RecipeId")] Ingredient ingredient)
+        public async Task<IActionResult> Create([Bind("IngredientId,Name,Quantity,RecipeId")] Ingredient ingredient)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeId", ingredient.RecipeId);
+            ViewBag.RecipeId = new SelectList(_context.Recipes, "RecipeId", "RecipeTitle", ingredient.RecipeId);
             return View(ingredient);
         }
 
@@ -90,7 +90,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IngredientId,Name,Quantity,Diet,RecipeId")] Ingredient ingredient)
+        public async Task<IActionResult> Edit(int id, [Bind("IngredientId,Name,Quantity,RecipeId")] Ingredient ingredient)
         {
             if (id != ingredient.IngredientId)
             {
