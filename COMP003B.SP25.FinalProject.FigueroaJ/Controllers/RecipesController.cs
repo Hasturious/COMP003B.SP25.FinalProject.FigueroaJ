@@ -34,6 +34,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
 
             var recipe = await _context.Recipes
                 .Include(r => r.Ingredients)
+                .Include(r => r.Reviews)
                 .FirstOrDefaultAsync(m => m.RecipeId == id);
 
             if (recipe == null)

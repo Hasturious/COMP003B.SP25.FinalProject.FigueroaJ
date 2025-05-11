@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h1>Details</h1>
 
 <div>
@@ -35,6 +36,35 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Bio)
         </dd>
+
+        <h3>Favorites</h3>
+        @if (Model.Favorites != null && Model.Favorites.Any())
+        {
+            <ul>
+                @foreach (var fav in Model.Favorites)
+                {
+                    <li>
+                        @if (fav.Visibility)
+                        {
+                            @fav.Recipe?.RecipeTitle
+                            @if (!string.IsNullOrEmpty(fav.Note))
+                            {
+                                <span>- Note: @fav.Note</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>Hidden</span>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>This user has no favorites.</p>
+        }
+
     </dl>
 </div>
 <div>

@@ -35,6 +35,8 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             }
 
             var user = await _context.Users
+                .Include(u => u.Favorites)
+                .ThenInclude(f => f.Recipe)
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {

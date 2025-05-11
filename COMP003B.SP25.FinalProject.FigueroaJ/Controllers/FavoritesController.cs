@@ -49,7 +49,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         // GET: Favorites/Create
         public IActionResult Create()
         {
-            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeId");
+            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeTitle");
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
             return View();
         }
@@ -84,13 +84,12 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // If form is invalid, re-display the form with validation errors
             ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeTitle", favorite.RecipeId);
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", favorite.UserId);
             return View(favorite);
         }
 
-        // GET: Favorites/Edit/5
+        // GET: Favorites/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -103,12 +102,12 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             {
                 return NotFound();
             }
-            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeId", favorite.RecipeId);
+            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeTitle", favorite.RecipeId);
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", favorite.UserId);
             return View(favorite);
         }
 
-        // POST: Favorites/Edit/5
+        // POST: Favorites/Edit/
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
