@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using COMP003B.SP25.FinalProject.FigueroaJ.Models;
 using Microsoft.EntityFrameworkCore;
-/*
+
 namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
 {
     [ApiController]
@@ -80,4 +80,3 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         }
     }
 }
-*/

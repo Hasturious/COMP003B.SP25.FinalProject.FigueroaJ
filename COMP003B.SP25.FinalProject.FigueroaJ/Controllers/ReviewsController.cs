@@ -25,7 +25,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Reviews/Details/5
+        // GET: Reviews/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,8 +54,6 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         }
 
         // POST: Reviews/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ReviewId,UserId,RecipeId,Comment,Reccomend")] Review review)
@@ -71,7 +69,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Edit/5
+        // GET: Reviews/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,9 +87,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Reviews/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ReviewId,UserId,RecipeId,Comment,Reccomend")] Review review)
@@ -126,7 +122,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Delete/5
+        // GET: Reviews/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -146,7 +142,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Delete/5
+        // POST: Reviews/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

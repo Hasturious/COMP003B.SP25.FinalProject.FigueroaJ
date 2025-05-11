@@ -25,7 +25,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Favorites/Details/5
+        // GET: Favorites/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,26 +53,8 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
             return View();
         }
-
+        
         // POST: Favorites/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FavoriteId,UserId,RecipeId,Note,Visibility")] Favorite favorite)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(favorite);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["RecipeId"] = new SelectList(_context.Recipes, "RecipeId", "RecipeTitle", favorite.RecipeId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", favorite.UserId);
-            return View(favorite);
-        }
-        */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Favorite favorite)
@@ -108,8 +90,6 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         }
 
         // POST: Favorites/Edit/
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("FavoriteId,UserId,RecipeId,Note,Visibility")] Favorite favorite)
@@ -144,7 +124,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(favorite);
         }
 
-        // GET: Favorites/Delete/5
+        // GET: Favorites/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -164,7 +144,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(favorite);
         }
 
-        // POST: Favorites/Delete/5
+        // POST: Favorites/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -114,7 +114,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(recipe);
         }
 
-        // GET: Recipes/Delete/5
+        // GET: Recipes/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

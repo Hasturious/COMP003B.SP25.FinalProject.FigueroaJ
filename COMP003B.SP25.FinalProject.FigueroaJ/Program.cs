@@ -37,7 +37,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ
             app.UseStaticFiles();
 
             app.UseStaticFiles();
-
+            // Middleware intregation
             app.UseMiddleware<RequestTimingMiddleware>(); 
 
             app.UseRouting();

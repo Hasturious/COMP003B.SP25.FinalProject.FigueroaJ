@@ -25,7 +25,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Ingredients/Details/5
+        // GET: Ingredients/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,8 +52,6 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
         }
 
         // POST: Ingredients/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IngredientId,Name,Quantity,RecipeId")] Ingredient ingredient)
@@ -68,7 +66,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(ingredient);
         }
 
-        // GET: Ingredients/Edit/5
+        // GET: Ingredients/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,9 +83,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(ingredient);
         }
 
-        // POST: Ingredients/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Ingredients/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IngredientId,Name,Quantity,RecipeId")] Ingredient ingredient)
@@ -121,7 +117,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(ingredient);
         }
 
-        // GET: Ingredients/Delete/5
+        // GET: Ingredients/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,7 +136,7 @@ namespace COMP003B.SP25.FinalProject.FigueroaJ.Controllers
             return View(ingredient);
         }
 
-        // POST: Ingredients/Delete/5
+        // POST: Ingredients/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
